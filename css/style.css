@@ -18,7 +18,7 @@
     background: #FBF5F3;
     color: #E28413
 }
-#newNoteText {
+#newNoteText, #searchtext {
     margin-right: 15px;
     margin-left: 15px;
     font-size: medium;
@@ -78,3 +78,8 @@
     margin-left: 20px;
 }
 
+
+.inputs-container {
+    display: flex;
+    justify-content: space-around; 
+}

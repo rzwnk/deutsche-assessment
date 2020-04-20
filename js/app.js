@@ -52,8 +52,16 @@ function manageNode(e) {
         const childNotesDiv = noteParent.getElementsByClassName('childNotes')[0];
         createNote(true, noteText, childNotesDiv);
     }
-}
 
+    if (tgt.classList.contains('notes-text')) {
+        const noteText = prompt('input noteText');
+        parentArr[loc].noteText = noteText;
+        tgt.replaceChild(document.createTextNode(noteText), tgt.firstChild);
+        
+        const childNotesDiv = noteParent.getElementsByClassName('childNotes')[0];
+        createNote(true, noteText, childNotesDiv);
+    }
+}
 document.onkeypress = function (evt) {
     evt = evt || window.event;
     if (evt.keyCode == 13) {
@@ -119,7 +127,7 @@ function parseEventPath(path) {
             const index = getIndexOflement(element);
             const noteRef = containerArray[index];
             
-            if(i!==3){
+            if(i!==3 && i!==2){
                 containerArray = noteRef.childNotes;
             }
             else {
@@ -135,4 +143,30 @@ function getIndexOflement(elem){
     var  i= 0;
     while((elem=elem.previousSibling)!=null) ++i;
     return (i-1);
+}
+
+
+function performSearch () {
+    const value = document.getElementById('searchtext').value;
+
+    const matched = getMatchedNotes(allNotes, value);
+    console.log('matcheddd', matched);
+    document.getElementsByClassName('notes-container')[0].innerHTML = '';
+    createNotesFromArray( value ? matched : allNotes );
+    document.getElementById('searchtext').focus()
+}
+
+
+function getMatchedNotes (arr,str) {
+    let matched = [];
+
+    arr.forEach(item=>{
+        if((item.noteText || "").indexOf(str)!==-1){
+            matched.push({noteText: item.noteText || '', childNotes:[]})
+        }
+        if(item.childNotes && item.childNotes.length){
+            matched = matched.concat(getMatchedNotes(item.childNotes, str));
+        }
+    })
+    return matched;
 }

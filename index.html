@@ -11,10 +11,15 @@
 <body>
     <div id="container">
         <h1 class="title">Notes Map!</h1>
-        <div>
-            <input id="newNoteText" type="text">
-            <button class="createButton">Create Note</button>
-        </div>
+        <div class="inputs-container"><div>
+                <input id="newNoteText" type="text">
+                <button class="createButton">Create Note</button>
+            </div>
+    
+    
+            <div>
+                <input id="searchtext" oninput="performSearch()" placeholder="type here to search" type="text">
+                </div></div>
         <div class="notes-container">
         </div>
     </div>
