@@ -1,0 +1,5 @@
+implemented creating top level notes
+sub level notes
+deleting a note
+renaming by clicking on any note text
+searching
